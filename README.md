@@ -26,6 +26,9 @@ def test_signal(sender, instance, **kwargs):
     time.sleep(3)  # Simulating a long-running operation
     print("Signal finished!")
 ```
+run the django shell
+```python manage.py shell
+```
 output :
 ```Before saving instance
 Signal started...
