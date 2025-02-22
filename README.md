@@ -26,3 +26,9 @@ def test_signal(sender, instance, **kwargs):
     time.sleep(3)  # Simulating a long-running operation
     print("Signal finished!")
 ```
+```Before saving instance
+Signal started...
+(Signal processing for 3 seconds...)
+Signal finished!
+After saving instance
+```
