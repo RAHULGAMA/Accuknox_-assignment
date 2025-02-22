@@ -29,7 +29,6 @@ def test_signal(sender, instance, **kwargs):
 run the django shell
 ```
 python manage.py shell
-
 ```
 output :
 ```Before saving instance
