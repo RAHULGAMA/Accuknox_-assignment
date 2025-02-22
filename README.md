@@ -19,7 +19,6 @@ import time
 class TestModel(models.Model):
     name = models.CharField(max_length=100)
 
-# Signal handler
 @receiver(post_save, sender=TestModel)
 def test_signal(sender, instance, **kwargs):
     print("Signal started...")
@@ -63,7 +62,6 @@ from django.dispatch import receiver
 class TestModel(models.Model):
     name = models.CharField(max_length=100)
 
-# Signal handler that simulates a time-consuming task
 @receiver(post_save, sender=TestModel)
 def test_signal_handler(sender, instance, created, **kwargs):
     print("Signal handler started")
