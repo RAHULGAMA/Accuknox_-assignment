@@ -55,7 +55,6 @@ Question 2: Do django signals run in the same thread as the caller? Please suppo
 Ans : By default, Django signals run synchronously in the same thread as the caller. This means that when a signal is sent (for example, after saving a model instance), the connected signal handlers execute immediately in the same thread, blocking further execution until they complete.
 
 ``` ruby
-# models.py
 import time
 from django.db import models
 from django.db.models.signals import post_save
@@ -70,4 +69,29 @@ def test_signal_handler(sender, instance, created, **kwargs):
     print("Signal handler started")
     time.sleep(3)  # Simulate a delay of 3 seconds
     print("Signal handler finished")
+```
+
+<hr>
+
+Question 3: By default do django signals run in the same database transaction as the caller? Please support your answer with a code snippet that conclusively proves your stance. The code does not need to be elegant and production ready, we just need to understand your logic.
+
+Ans : By default, Django signals do not run in the same database transaction as the caller. This means that even if the database transaction fails and rolls back, the signal might have already executed, leading to unintended side effects.
+
+```ruby
+# models.py
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+class TestModel(models.Model):
+    name = models.CharField(max_length=100)
+
+class AnotherModel(models.Model):
+    message = models.CharField(max_length=100)
+
+@receiver(post_save, sender=TestModel)
+def test_signal_handler(sender, instance, **kwargs):
+    print("Signal started")
+    AnotherModel.objects.create(message="Signal executed")  # This writes to the DB
+    print("Signal finished")
 ```
