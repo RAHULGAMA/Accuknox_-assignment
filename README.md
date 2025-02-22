@@ -49,4 +49,25 @@ Signal finished!
 After saving instance
 ```
 <hr>
+
 Question 2: Do django signals run in the same thread as the caller? Please support your answer with a code snippet that conclusively proves your stance. The code does not need to be elegant and production ready, we just need to understand your logic.
+
+Ans : By default, Django signals run synchronously in the same thread as the caller. This means that when a signal is sent (for example, after saving a model instance), the connected signal handlers execute immediately in the same thread, blocking further execution until they complete.
+
+``` ruby
+# models.py
+import time
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+class TestModel(models.Model):
+    name = models.CharField(max_length=100)
+
+# Signal handler that simulates a time-consuming task
+@receiver(post_save, sender=TestModel)
+def test_signal_handler(sender, instance, created, **kwargs):
+    print("Signal handler started")
+    time.sleep(3)  # Simulate a delay of 3 seconds
+    print("Signal handler finished")
+```
