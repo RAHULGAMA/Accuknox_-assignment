@@ -78,7 +78,6 @@ Question 3: By default do django signals run in the same database transaction as
 Ans : By default, Django signals do not run in the same database transaction as the caller. This means that even if the database transaction fails and rolls back, the signal might have already executed, leading to unintended side effects.
 
 ```ruby
-# models.py
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -94,4 +93,40 @@ def test_signal_handler(sender, instance, **kwargs):
     print("Signal started")
     AnotherModel.objects.create(message="Signal executed")  # This writes to the DB
     print("Signal finished")
+```
+
+<hr>
+
+
+Topic: Custom Classes in Python
+
+Description: You are tasked with creating a Rectangle class with the following requirements:
+
+1.)An instance of the Rectangle class requires length:int and width:int to be initialized.
+2.)We can iterate over an instance of the Rectangle class 
+3.)When an instance of the Rectangle class is iterated over, we first get its length in the format: {'length': <VALUE_OF_LENGTH>} followed by the width {width: <VALUE_OF_WIDTH>}
+
+```ruby
+class Rectangle:
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def __iter__(self):
+        yield {"length": self.length}
+        yield {"width": self.width}
+
+# Example usage:
+rect = Rectangle(10, 5)
+
+# Iterating over the rectangle instance
+for value in rect:
+    print(value)
+```
+
+output :
+
+```
+{'length': 10}
+{'width': 5}
 ```
