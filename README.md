@@ -116,10 +116,8 @@ class Rectangle:
         yield {"length": self.length}
         yield {"width": self.width}
 
-# Example usage:
 rect = Rectangle(10, 5)
 
-# Iterating over the rectangle instance
 for value in rect:
     print(value)
 ```
