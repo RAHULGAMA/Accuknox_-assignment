@@ -31,7 +31,8 @@ run the django shell
 python manage.py shell
 ```
 output :
-```Before saving instance
+```
+Before saving instance
 Signal started...
 (Signal processing for 3 seconds...)
 Signal finished!
