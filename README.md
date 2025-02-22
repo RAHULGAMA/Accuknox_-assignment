@@ -27,7 +27,9 @@ def test_signal(sender, instance, **kwargs):
     print("Signal finished!")
 ```
 run the django shell
-```python manage.py shell
+```
+python manage.py shell
+
 ```
 output :
 ```Before saving instance
