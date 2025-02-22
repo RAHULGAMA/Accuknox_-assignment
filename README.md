@@ -31,7 +31,7 @@ run the django shell :
 python manage.py shell
 ```
 Then execute :
-```
+``` ruby
 from myapp.models import TestModel
 import time
 
